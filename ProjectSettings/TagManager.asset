@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - ball
+  - swap
+  - stone
+  - destroy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - ball
+  - stone
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: map
+    uniqueID: 3176372755
+    locked: 0
+  - name: path
+    uniqueID: 1967999719
+    locked: 0
+  - name: exit
+    uniqueID: 2750432321
+    locked: 0
+  - name: ball
+    uniqueID: 2891693617
+    locked: 0
+  - name: board
+    uniqueID: 3237346621
+    locked: 0
