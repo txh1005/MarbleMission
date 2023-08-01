@@ -8,7 +8,8 @@ public class Ball : MonoBehaviour
     public float ballSpeed = 10f;
     Vector3 direction;
     bool isFire;
-    private Vector3 initialPosition;    
+    private Vector3 initialPosition;
+    [SerializeField] ballType ballType;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +21,16 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
     }
     public void LaunchBall()
     {
         if (!isFire)
         {
-            direction =initialPosition;
+            direction = initialPosition;
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //rigid.AddForce((mousePosition - direction) * ballSpeed, ForceMode2D.Impulse);
-            rigid.velocity =(mousePosition- direction) * ballSpeed;
+            rigid.velocity = (mousePosition - direction) * ballSpeed;
         }
         isFire = true;
     }
@@ -39,6 +40,13 @@ public class Ball : MonoBehaviour
         if (other.gameObject.tag == "destroy")
         {
             Destroy(gameObject);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "ball")
+        {
+            Debug.Log(ballType);
         }
     }
 }

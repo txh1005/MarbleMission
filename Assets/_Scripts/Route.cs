@@ -5,9 +5,10 @@ using UnityEngine;
 public class Route : MonoBehaviour
 {
     public static Route instance;
-    [SerializeField]
-    private Transform[] controlPoints;
+
+    public Transform[] controlPoints;
     private Vector2 gismosPos;
+
     private void OnDrawGizmos()
     {
         for (float t= 0; t <= 1; t+=0.1f)

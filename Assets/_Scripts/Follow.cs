@@ -5,7 +5,7 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
     [SerializeField]
-    private Transform[] routes;
+    public Transform[] routes;
     private int routeToGo;
     private float tParam;
     private Vector2 ballPos;
@@ -22,7 +22,7 @@ public class Follow : MonoBehaviour
     }
     private void Update()
     {
-        if (coroutineAllow&& isMoving)
+        if (coroutineAllow && isMoving)
         {
             StartCoroutine(GoByTheRoute(routeToGo));
         }
@@ -34,7 +34,7 @@ public class Follow : MonoBehaviour
         Vector2 p1 = routes[routesNumber].GetChild(1).position;
         Vector2 p2 = routes[routesNumber].GetChild(2).position;
         Vector2 p3 = routes[routesNumber].GetChild(3).position;
-        while (tParam<1)
+        while (tParam < 1)
         {
             tParam += Time.deltaTime * speed;
             ballPos = Mathf.Pow(1 - tParam, 3) * p0 +
@@ -46,7 +46,7 @@ public class Follow : MonoBehaviour
         }
         tParam = 0f;
         routeToGo += 1;
-        if (routeToGo>routes.Length-1)
+        if (routeToGo > routes.Length - 1)
         {
             isMoving = false;
         }

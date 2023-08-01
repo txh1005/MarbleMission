@@ -9,9 +9,11 @@ public class SpawnMoveBall : MonoBehaviour
     public float distance;
     public float timeBtwBall=1.5f;
     private List<GameObject> ballList = new List<GameObject>();
+    private List<Vector2> ballPositions = new List<Vector2>();
+    private Transform ballPosList;
 
     [SerializeField]
-    private Transform[] routes;
+    private Route[] routes;
     private int routeToGo;
     private float tParam;
     private Vector2 ballPos;
@@ -53,31 +55,31 @@ public class SpawnMoveBall : MonoBehaviour
             yield return new WaitForSeconds(timeBtwBall);
             //int a = Random.Range(0,prefabBall.Length-1);
             Vector3 pos = new Vector3(i * distance, 0f, 0f);
-            GameObject ball = Instantiate(prefabBall[Random.Range(0, prefabBall.Length)], pos, Quaternion.identity);
+            GameObject ball = Instantiate(prefabBall[Random.Range(0, prefabBall.Length)], transform.position, Quaternion.identity);
             ballList.Add(ball);
         }
-        yield return new WaitForSeconds(0.1f);
     }
     private IEnumerator GoByTheRoute(int routesNumber)
     {
         coroutineAllow = false;
-        Vector2 p0 = routes[routesNumber].GetChild(0).position;
-        Vector2 p1 = routes[routesNumber].GetChild(1).position;
-        Vector2 p2 = routes[routesNumber].GetChild(2).position;
-        Vector2 p3 = routes[routesNumber].GetChild(3).position;
+        Vector2 p0 = routes[routesNumber].controlPoints[0].position;
+        Vector2 p1 = routes[routesNumber].controlPoints[1].position;
+        Vector2 p2 = routes[routesNumber].controlPoints[2].position;
+        Vector2 p3 = routes[routesNumber].controlPoints[3].position;
         while (tParam < 1)
         {
             tParam += Time.deltaTime * speed;
-            foreach (GameObject ball in ballList)
-            {
-              
+
+                //GameObject ball = ballList[i];
                 ballPos = Mathf.Pow(1 - tParam, 3) * p0 +
-                        3 * Mathf.Pow(1 - tParam, 2) * tParam * p1 +
-                        3 * (1 - tParam) * Mathf.Pow(tParam, 2) * p2 +
-                        Mathf.Pow(tParam, 3) * p3;
-                ball.transform.position = ballPos;
-             
-            }
+                          3 * Mathf.Pow(1 - tParam, 2) * tParam * p1 +
+                          3 * (1 - tParam) * Mathf.Pow(tParam, 2) * p2 +
+                          Mathf.Pow(tParam, 3) * p3;
+            
+            for (int i = 0; i < ballList.Count; i++)
+            {
+                ballList[0].transform.position = ballPos;             
+            }                  
             yield return new WaitForEndOfFrame();
         }
         tParam = 0f;
