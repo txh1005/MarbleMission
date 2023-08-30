@@ -8,6 +8,7 @@ TagManager:
   - swap
   - stone
   - destroy
+  - end
   layers:
   - Default
   - TransparentFX
