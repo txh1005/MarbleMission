@@ -50,12 +50,12 @@ public class BowShoot2 : Singleton<BowShoot2>
         int randomMainIndex = Random.Range(0, ballDataList.Count);
         BallData randomMainBallData = ballDataList[randomMainIndex];
         mainBall = Instantiate(ballPrefab, mainBallPos.position, Quaternion.identity, mainBallPos);
-        mainBall.GetComponent<SpriteRenderer>().sortingOrder=1;
+        mainBall.GetComponent<SpriteRenderer>().sortingOrder=2;
         mainBall.ballData = randomMainBallData;
         int randomExtraIndex = Random.Range(0, ballDataList.Count);
         BallData randomExtraBallData = ballDataList[randomExtraIndex];
         extraBall = Instantiate(ballPrefab, extraBallPos.position, Quaternion.identity, extraBallPos);
-        extraBall.GetComponent<SpriteRenderer>().sortingOrder=1;
+        extraBall.GetComponent<SpriteRenderer>().sortingOrder=2;
         extraBall.ballData = randomExtraBallData;
         //mainBall.transform.SetParent(parentObj);
         //extraBall.transform.SetParent(parentObj);
@@ -74,7 +74,7 @@ public class BowShoot2 : Singleton<BowShoot2>
         int randomExtraIndex = Random.Range(0, ballDataList.Count);
         BallData randomExtraBallData = ballDataList[randomExtraIndex];
         extraBall = Instantiate(ballPrefab, extraBallPos.position, Quaternion.identity, extraBallPos);
-        extraBall.GetComponent<SpriteRenderer>().sortingOrder=1;
+        extraBall.GetComponent<SpriteRenderer>().sortingOrder=2;
         extraBall.ballData = randomExtraBallData;
         extraBall.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
         mainBall.isBall = true;

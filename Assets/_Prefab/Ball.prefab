@@ -31,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.7981888, y: 1.2171168, z: -0.10620848}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7161535057955968625}
   m_Father: {fileID: 0}
@@ -161,6 +161,7 @@ MonoBehaviour:
   skinName: 
   skeletonAnimation: {fileID: 7161535057955968908}
   isReload: 0
+  isBallAdd: 0
 --- !u!70 &8611241350437069877
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -207,6 +208,18 @@ PrefabInstance:
     - target: {fileID: 2595610271932914972, guid: 106ab45a3443c944695a9e8865f20926, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2595610271932914972, guid: 106ab45a3443c944695a9e8865f20926, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2595610271932914972, guid: 106ab45a3443c944695a9e8865f20926, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2595610271932914972, guid: 106ab45a3443c944695a9e8865f20926, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 2595610271932914972, guid: 106ab45a3443c944695a9e8865f20926, type: 3}
       propertyPath: m_LocalPosition.x

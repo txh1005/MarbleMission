@@ -23,7 +23,7 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
     {
         for (int i = 0; i < maxBall; i++)
         {
-            yield return new WaitForSeconds(0.5f);//0.45/speed
+            yield return new WaitForSeconds(0.5f);//0.45/speed=0.5f
             Ball2 newBall = Instantiate(ballPrefab, transform.position, Quaternion.identity);
             Vector3 a = newBall.transform.position;
             a.z = 0f;
@@ -34,7 +34,7 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
             newBall.transform.SetParent(storeObj);
         }
     }
-    
+
     public void InsertBall(Ball2 _newBall, int _index)
     {
         for (int i = 0; i < _index; i++)
@@ -51,13 +51,13 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
     {
         if (ballList.Count > 0 && ballList.Count <= maxBall)
         {
-            for (int i = 1; i < ballList.Count-1; i++)
+            for (int i = 1; i < ballList.Count - 1; i++)
             {
                 if (ballList[i].transform.position == MoveBall.Instance.waypoints[0].transform.position && ballList[i - 1].isReverse)
                 {
                     ballList[i].isReload = true;
                 }
-                if (Vector3.Distance(ballList[i - 1].transform.position, MoveBall.Instance.waypoints[1].transform.position)<=0.2 && !ballList[i].isReverse)
+                if (Vector3.Distance(ballList[i - 1].transform.position, MoveBall.Instance.waypoints[1].transform.position) <= 0.2 && !ballList[i].isReverse)
                 {
                     if (ballList[i].isReload)
                     {

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ball20
   m_EditorClassIdentifier: 
   id: 20
-  type: 0
+  type: 1
   color: 0
   item: 0
