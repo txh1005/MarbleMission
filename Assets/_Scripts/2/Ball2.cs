@@ -242,7 +242,7 @@ public class Ball2 : MonoBehaviour
         {
             Vector3 collisionPosition = collision.transform.position;
             isBall = false;
-           
+
             BowShoot2.Instance.mainBall.GetComponent<SpriteRenderer>().sortingOrder = 0;
             rigid.velocity = Vector2.zero;
             int index = BallListSpawn2.Instance.ballList.IndexOf(coliObj);
@@ -309,13 +309,18 @@ public class Ball2 : MonoBehaviour
         if (!isMove && !isBall)
         {
             int index = BallListSpawn2.Instance.ballList.IndexOf(coliObj);
-            if (!isBallMove)
+            
+            if (coliObj.isBallAdd)
             {
-                Debug.Log("a"); 
+                coliObj.isMove = false;
+                //StartCoroutine(InsertBall1(index));
             }
             //ReverseMove(index);
-            isMove = true;
-            speed = moveSpeed;
+            else
+            {
+                isMove = true;
+                speed = moveSpeed;
+            }
         }
         if (collision.gameObject.CompareTag("end") && !isBall)
         {

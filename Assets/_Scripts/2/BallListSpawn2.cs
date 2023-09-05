@@ -6,6 +6,7 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
 {
     public Ball2 ballPrefab;
     public BallData[] ballData1;
+    public BallDataSO ballData2;
     public List<Ball2> ballList;
     public int maxBall;
     public Transform storeObj;
