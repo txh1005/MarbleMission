@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballDatas:
   - index: 0
-    ballColor1: 0
-  - index: 1
-    ballColor1: 1
-  - index: 2
-    ballColor1: 2
-  - index: 3
-    ballColor1: 4
-  - index: 4
-    ballColor1: 3
-  - index: 5
-    ballColor1: 0
-  - index: 6
-    ballColor1: 2
-  - index: 7
-    ballColor1: 1
-  - index: 8
-    ballColor1: 2
-  - index: 9
-    ballColor1: 3
+    color1: 0
+  - index: 0
+    color1: 2
+  - index: 0
+    color1: 3
+  - index: 0
+    color1: 4
+  - index: 0
+    color1: 1
+  - index: 0
+    color1: 2
+  - index: 0
+    color1: 1
+  - index: 0
+    color1: 0
+  - index: 0
+    color1: 2
+  - index: 0
+    color1: 2
   count: 10

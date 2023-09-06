@@ -11,9 +11,9 @@ public class Ball2 : MonoBehaviour
 
     public TypeBall type;
     public BallItem item;
-    public BallColor color;
+    public BallColor1 color;
     public int id;
-    public BallData ballData;
+    public BallData2 ballData;
     public float ballSpeed = 10f;
     public bool isBall;
     public Transform[] waypoints;
@@ -65,9 +65,9 @@ public class Ball2 : MonoBehaviour
     void Start()
     {
         SetColor();
-        SetId();
+        /*SetId();
         SetType();
-        SetItem();
+        SetItem();*/
         waypoints = MoveBall.Instance.waypoints;
         speed = moveSpeed;
         isFire = false;
@@ -92,7 +92,7 @@ public class Ball2 : MonoBehaviour
         }
 
     }
-    public void SetId()
+/*    public void SetId()
     {
         id = BallListSpawn2.Instance.ballList.Count - 1;
     }
@@ -123,25 +123,25 @@ public class Ball2 : MonoBehaviour
             default:
                 break;
         }
-    }
+    }*/
     public void SetColor()
     {
-        color = ballData.color;
+        color = ballData.color1;
         switch (color)
         {
-            case BallColor.Blue:
+            case BallColor1.Blue:
                 skeletonAnimation.Skeleton.SetSkin("Blue");
                 break;
-            case BallColor.Green:
+            case BallColor1.Green:
                 skeletonAnimation.Skeleton.SetSkin("Green");
                 break;
-            case BallColor.Red:
+            case BallColor1.Red:
                 skeletonAnimation.Skeleton.SetSkin("Red");
                 break;
-            case BallColor.Violet:
+            case BallColor1.Violet:
                 skeletonAnimation.Skeleton.SetSkin("Violet");
                 break;
-            case BallColor.Yellow:
+            case BallColor1.Yellow:
                 skeletonAnimation.Skeleton.SetSkin("Yellow");
                 break;
             default:
@@ -240,9 +240,13 @@ public class Ball2 : MonoBehaviour
         Ball2 coliObj = collision.gameObject.GetComponent<Ball2>();
         if (collision.gameObject.CompareTag("ball") && isBall && !hasCollided)
         {
+            BallColorCount.Instance.AddValueDic(this, 1);
+            foreach (var kvp in BallColorCount.Instance.BallColorDic)
+            {
+                Debug.Log($"Color: {kvp.Key}, Count: {kvp.Value}");
+            }
             Vector3 collisionPosition = collision.transform.position;
             isBall = false;
-
             BowShoot2.Instance.mainBall.GetComponent<SpriteRenderer>().sortingOrder = 0;
             rigid.velocity = Vector2.zero;
             int index = BallListSpawn2.Instance.ballList.IndexOf(coliObj);
@@ -285,6 +289,7 @@ public class Ball2 : MonoBehaviour
             {
                 BallListSpawn2.Instance.ballList[0].isReverse = false;
                 GameController.Instance.RemoveSameBall();
+                BallColorCount.Instance.AddValueDic(this, -count+1);
                 if (GameController.Instance.nextBallIndex < BallListSpawn2.Instance.ballList.Count - 1)
                 {
                     if (BallListSpawn2.Instance.ballList[GameController.Instance.nextBallIndex + 1].color == BallListSpawn2.Instance.ballList[GameController.Instance.nextBallIndex].color)
@@ -313,7 +318,7 @@ public class Ball2 : MonoBehaviour
             if (coliObj.isBallAdd)
             {
                 coliObj.isMove = false;
-                //StartCoroutine(InsertBall1(index));
+                StartCoroutine(InsertBallStop(index));
             }
             //ReverseMove(index);
             else
@@ -382,6 +387,21 @@ public class Ball2 : MonoBehaviour
             //ball.isMove = false;
         }
     }
+    public IEnumerator InsertBallStop(int index)
+    {
+        for (int i = 0; i < index; i++)
+        {
+            Ball2 ball = BallListSpawn2.Instance.ballList[i];
+            ball.speed = moveSpeed*2;
+            ball.isMove = true;
+        }
+        yield return new WaitForSeconds(0.45f);
+        for (int i = index-1; i >=0; i--)
+        {
+            Ball2 ball = BallListSpawn2.Instance.ballList[i];
+            ball.isMove = false;
+        }
+    }    
     public void SameColorNext1(int index)
     {
         for (int i = index; i > 0; i--)
@@ -480,6 +500,7 @@ public class Ball2 : MonoBehaviour
             else
             {
                 GameController.Instance.RemoveSameBall();
+                BallColorCount.Instance.AddValueDic(this, -count);
                 if (BallListSpawn2.Instance.ballList[GameController.Instance.nextBallIndex + 1].color == BallListSpawn2.Instance.ballList[GameController.Instance.nextBallIndex].color)
                 {
                     for (int i = GameController.Instance.nextBallIndex; i >= 0; i--)

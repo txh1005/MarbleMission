@@ -11,7 +11,9 @@ public class BowShoot2 : Singleton<BowShoot2>
     [SerializeField] private Transform extraBallPos;
 
     public Ball2 mainBall;
-    public List<BallData> ballDataList;
+    public List<BallData2> ballDataList;
+    public BallColorCount ballColorCount;
+    public List<string> availableColors;
 
     private Ball2 extraBall;
     private bool isSpawn = false;
@@ -23,6 +25,7 @@ public class BowShoot2 : Singleton<BowShoot2>
     }
     private void Update()
     {
+        availableColors = new List<string>(ballColorCount.BallColorDic.Keys);
         if (Input.GetMouseButtonUp(0))
         {
             mainBall.LaunchBall();
@@ -48,14 +51,15 @@ public class BowShoot2 : Singleton<BowShoot2>
     void SpawnBall()
     {
         int randomMainIndex = Random.Range(0, ballDataList.Count);
-        BallData randomMainBallData = ballDataList[randomMainIndex];
+
+        BallData2 randomMainBallData = ballDataList[randomMainIndex];
         mainBall = Instantiate(ballPrefab, mainBallPos.position, Quaternion.identity, mainBallPos);
-        mainBall.GetComponent<SpriteRenderer>().sortingOrder=2;
+        mainBall.GetComponent<SpriteRenderer>().sortingOrder = 2;
         mainBall.ballData = randomMainBallData;
         int randomExtraIndex = Random.Range(0, ballDataList.Count);
-        BallData randomExtraBallData = ballDataList[randomExtraIndex];
+        BallData2 randomExtraBallData = ballDataList[randomExtraIndex];
         extraBall = Instantiate(ballPrefab, extraBallPos.position, Quaternion.identity, extraBallPos);
-        extraBall.GetComponent<SpriteRenderer>().sortingOrder=2;
+        extraBall.GetComponent<SpriteRenderer>().sortingOrder = 2;
         extraBall.ballData = randomExtraBallData;
         //mainBall.transform.SetParent(parentObj);
         //extraBall.transform.SetParent(parentObj);
@@ -70,12 +74,17 @@ public class BowShoot2 : Singleton<BowShoot2>
     }
     void ExtraBallUpgradeToMainBall()
     {
+        int randomMainIndex1 = Random.Range(0, availableColors.Count);
+        string nameColor = availableColors[randomMainIndex1];
+        BallColor1 extraColor = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor);
+
         mainBall = extraBall;
-        int randomExtraIndex = Random.Range(0, ballDataList.Count);
-        BallData randomExtraBallData = ballDataList[randomExtraIndex];
+        //int randomExtraIndex = Random.Range(0, ballDataList.Count);
+        //BallData2 randomExtraBallData = ballDataList[randomExtraIndex];
         extraBall = Instantiate(ballPrefab, extraBallPos.position, Quaternion.identity, extraBallPos);
-        extraBall.GetComponent<SpriteRenderer>().sortingOrder=2;
-        extraBall.ballData = randomExtraBallData;
+        extraBall.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        //extraBall.ballData = randomExtraBallData;
+        extraBall.ballData.color1 = extraColor;
         extraBall.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
         mainBall.isBall = true;
         extraBall.isBall = true;

@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Ball Data", menuName = "ScriptableObject/BallData2")]
+[CreateAssetMenu(fileName = "New Level", menuName = "ScriptableObject/BallData2")]
 public class BallDataSO : ScriptableObject
 {
     public BallData2[] ballDatas;

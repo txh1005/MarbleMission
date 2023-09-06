@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallListSpawn2 : Singleton<BallListSpawn2>
 {
     public Ball2 ballPrefab;
-    public BallData[] ballData1;
+    //public BallData[] ballData1;
     public BallDataSO ballData2;
     public List<Ball2> ballList;
     public int maxBall;
@@ -29,7 +29,7 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
             Vector3 a = newBall.transform.position;
             a.z = 0f;
             newBall.isMove = true;
-            newBall.ballData = ballData1[i];
+            newBall.ballData = ballData2.ballDatas[i];
             //ballScript.SetBallData(ballPrefab.GetComponent<Ball2>());
             ballList.Add(newBall);
             newBall.transform.SetParent(storeObj);
@@ -40,7 +40,7 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
     {
         for (int i = 0; i < _index; i++)
         {
-            Ball2 ball = BallListSpawn2.Instance.ballList[i];
+            Ball2 ball = ballList[i];
             _newBall.currentWaypointIndex = ball.currentWaypointIndex;
             _newBall.currentWaypointIndex += 2;
             if (ball.currentWaypointIndex >= ball.waypoints.Length)

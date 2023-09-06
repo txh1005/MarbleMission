@@ -25,5 +25,5 @@ public enum TypeBall1
 public class BallData2
 {
     public int index;
-    public BallColor1 ballColor1;
+    public BallColor1 color1;
 }

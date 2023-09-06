@@ -707,7 +707,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
 --- !u!114 &260432429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2605,6 +2605,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1671589449}
   - {fileID: 2023489186}
   - {fileID: 1287110061}
   m_Father: {fileID: 1317680336}
@@ -2629,11 +2630,18 @@ MonoBehaviour:
   extraBallPos: {fileID: 1287110061}
   mainBall: {fileID: 0}
   ballDataList:
-  - {fileID: 11400000, guid: c9babf6b43dd6d34db31c890499e8c57, type: 2}
-  - {fileID: 11400000, guid: e5e34676b7a01fe43aa2201745c5dc1d, type: 2}
-  - {fileID: 11400000, guid: e6d45785e5ede8a48b7051a7afa25941, type: 2}
-  - {fileID: 11400000, guid: 30391b0713a06694995660c9e9026844, type: 2}
-  - {fileID: 11400000, guid: 5775f3093e1e8ea46870dc36ec2d7b53, type: 2}
+  - index: 0
+    color1: 0
+  - index: 0
+    color1: 1
+  - index: 0
+    color1: 2
+  - index: 0
+    color1: 3
+  - index: 0
+    color1: 4
+  ballColorCount: {fileID: 1671589448}
+  availableColors: []
 --- !u!114 &679253169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4274,27 +4282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 722904611831149003, guid: 4073932e71e91bc49918f1acf7a73c6d, type: 3}
-  ballData1:
-  - {fileID: 11400000, guid: eb4576f19f1e7c04cbacc2fae40e950a, type: 2}
-  - {fileID: 11400000, guid: f02767ab7dd745945bcbc685ab122f6e, type: 2}
-  - {fileID: 11400000, guid: 1a988f1bc4db774438b30cd63f5f955e, type: 2}
-  - {fileID: 11400000, guid: 6686da92dbb972842bce6896a4e3ed71, type: 2}
-  - {fileID: 11400000, guid: a4a80ca048c8af24a981e6ee7303dcbb, type: 2}
-  - {fileID: 11400000, guid: 19b53e61e3b917144bf1f9509018aea7, type: 2}
-  - {fileID: 11400000, guid: 8cbb54e4ecb20dc4c8ff8ec589fa010e, type: 2}
-  - {fileID: 11400000, guid: cbc08f6952500a5439a5b7331f390e18, type: 2}
-  - {fileID: 11400000, guid: 5eeb9a02089fadd4ab6692cd18e8b2e0, type: 2}
-  - {fileID: 11400000, guid: b03ffd11235792b4e96e57cc3a6d48b6, type: 2}
-  - {fileID: 11400000, guid: 14daaa9949eaf274ebbec29595fbffd2, type: 2}
-  - {fileID: 11400000, guid: 2937c70dda3b42c428f77cca25aa880a, type: 2}
-  - {fileID: 11400000, guid: 70061bdbd80e24048b12ca71591d5850, type: 2}
-  - {fileID: 11400000, guid: 013fa079db8e8484d9262785f8b20b53, type: 2}
-  - {fileID: 11400000, guid: 63957573b02dd17459f251a7311f896a, type: 2}
-  - {fileID: 11400000, guid: 065218e44c4e28041aeb255f68c3ded0, type: 2}
-  - {fileID: 11400000, guid: bfb8e1299bad2a644b6287bc538e151b, type: 2}
-  - {fileID: 11400000, guid: 0a04c610f69365d4dacb6db313f5557c, type: 2}
-  - {fileID: 11400000, guid: 1d7f3f88b7f187e45956f4569c265399, type: 2}
-  - {fileID: 11400000, guid: 497a594212df6884db485bcc566d9003, type: 2}
   ballData2: {fileID: 11400000, guid: 11f133f332b9b7145bca5a27f157b93f, type: 2}
   ballList: []
   maxBall: 10
@@ -4555,11 +4542,18 @@ MonoBehaviour:
   extraBallPos: {fileID: 665954910}
   mainBall: {fileID: 0}
   ballDataList:
-  - {fileID: 11400000, guid: c9babf6b43dd6d34db31c890499e8c57, type: 2}
-  - {fileID: 11400000, guid: e5e34676b7a01fe43aa2201745c5dc1d, type: 2}
-  - {fileID: 11400000, guid: e6d45785e5ede8a48b7051a7afa25941, type: 2}
-  - {fileID: 11400000, guid: 30391b0713a06694995660c9e9026844, type: 2}
-  - {fileID: 11400000, guid: 5775f3093e1e8ea46870dc36ec2d7b53, type: 2}
+  - index: 0
+    color1: 0
+  - index: 0
+    color1: 0
+  - index: 0
+    color1: 0
+  - index: 0
+    color1: 0
+  - index: 0
+    color1: 0
+  ballColorCount: {fileID: 0}
+  availableColors: []
 --- !u!1 &1141935571
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,7 +5288,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 679253167}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313745720
 GameObject:
@@ -6448,6 +6442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6683a28d9a8483f4583fc98175570fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataSO: {fileID: 11400000, guid: 11f133f332b9b7145bca5a27f157b93f, type: 2}
 --- !u!4 &1671589449
 Transform:
   m_ObjectHideFlags: 0
@@ -6455,13 +6450,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671589447}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9698589, y: -0.21604061, z: -0.08722617}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_Father: {fileID: 679253167}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1713246193
 GameObject:
@@ -7239,7 +7234,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 679253167}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2025712059
 GameObject:
