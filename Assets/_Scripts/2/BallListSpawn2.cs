@@ -7,6 +7,7 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
     public Ball2 ballPrefab;
     //public BallData[] ballData1;
     public BallDataSO ballData2;
+    public PathSO pathSO;
     public List<Ball2> ballList;
     public int maxBall;
     public Transform storeObj;
@@ -36,7 +37,7 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
         }
     }
 
-    public void InsertBall(Ball2 _newBall, int _index)
+    /*public void InsertBall(Ball2 _newBall, int _index)
     {
         for (int i = 0; i < _index; i++)
         {
@@ -45,20 +46,20 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
             _newBall.currentWaypointIndex += 2;
             if (ball.currentWaypointIndex >= ball.waypoints.Length)
                 ball.currentWaypointIndex = ball.waypoints.Length - 1;
-            ball.transform.position = ball.waypoints[_newBall.currentWaypointIndex].position;
+            ball.transform.position = ball.waypoints[_newBall.currentWaypointIndex].point;
         }
-    }
+    }*/
     public IEnumerator MoveBallAfterReverse()
     {
         if (ballList.Count > 0 && ballList.Count <= maxBall)
         {
             for (int i = 1; i < ballList.Count - 1; i++)
             {
-                if (ballList[i].transform.position == MoveBall.Instance.waypoints[0].transform.position && ballList[i - 1].isReverse)
+                if (ballList[i].transform.position == pathSO.pathDatas[0].point && ballList[i - 1].isReverse)
                 {
                     ballList[i].isReload = true;
                 }
-                if (Vector3.Distance(ballList[i - 1].transform.position, MoveBall.Instance.waypoints[1].transform.position) <= 0.2 && !ballList[i].isReverse)
+                if (Vector3.Distance(ballList[i - 1].transform.position, pathSO.pathDatas[1].point) <= 0.2 && !ballList[i].isReverse)
                 {
                     if (ballList[i].isReload)
                     {

@@ -149,6 +149,7 @@ MonoBehaviour:
   ballSpeed: 15
   isBall: 0
   waypoints: []
+  pathSO: {fileID: 11400000, guid: 2847463c7526392478628dbe33a89d09, type: 2}
   speed: 0.9
   stoppingDistance: 0.1
   currentWaypointIndex: 0

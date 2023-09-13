@@ -14,9 +14,173 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathDatas:
   - index: 0
-    point: {x: -1.291, y: 1.56, z: 0}
+    point: {x: -1.7478, y: 0.5299978, z: 0}
   - index: 1
-    point: {x: 0, y: 0, z: 0}
+    point: {x: -1.757, y: 0.05299985, z: 0}
   - index: 2
-    point: {x: -1.736241, y: -0.3989041, z: 0}
-  count: 3
+    point: {x: -1.773, y: -0.4090002, z: 0}
+  - index: 3
+    point: {x: -1.771, y: -0.8730001, z: 0}
+  - index: 4
+    point: {x: -1.745, y: -1.335, z: 0}
+  - index: 5
+    point: {x: -1.722, y: -1.81, z: 0}
+  - index: 6
+    point: {x: -1.611, y: -2.266, z: 0}
+  - index: 7
+    point: {x: -1.407, y: -2.679, z: 0}
+  - index: 8
+    point: {x: -1.1, y: -3.018, z: 0}
+  - index: 9
+    point: {x: -0.7159998, y: -3.251, z: 0}
+  - index: 10
+    point: {x: -0.2789998, y: -3.372, z: 0}
+  - index: 11
+    point: {x: 0.1780002, y: -3.383, z: 0}
+  - index: 12
+    point: {x: 0.6360002, y: -3.329, z: 0}
+  - index: 13
+    point: {x: 1.075, y: -3.159, z: 0}
+  - index: 14
+    point: {x: 1.458, y: -2.868, z: 0}
+  - index: 15
+    point: {x: 1.763, y: -2.508, z: 0}
+  - index: 16
+    point: {x: 1.984, y: -2.091, z: 0}
+  - index: 17
+    point: {x: 2.106, y: -1.647002, z: 0}
+  - index: 18
+    point: {x: 2.145, y: -1.195, z: 0}
+  - index: 19
+    point: {x: 2.135, y: -0.7320002, z: 0}
+  - index: 20
+    point: {x: 2.07, y: -0.2730001, z: 0}
+  - index: 21
+    point: {x: 1.936, y: 0.1749998, z: 0}
+  - index: 22
+    point: {x: 1.758, y: 0.6029999, z: 0}
+  - index: 23
+    point: {x: 1.499, y: 0.9799998, z: 0}
+  - index: 24
+    point: {x: 1.134, y: 1.269, z: 0}
+  - index: 25
+    point: {x: 0.7180002, y: 1.467, z: 0}
+  - index: 26
+    point: {x: 0.2650002, y: 1.564, z: 0}
+  - index: 27
+    point: {x: -0.2009998, y: 1.568, z: 0}
+  - index: 28
+    point: {x: -0.6679998, y: 1.564, z: 0}
+  - index: 29
+    point: {x: -1.128, y: 1.578, z: 0}
+  - index: 30
+    point: {x: -1.538, y: 1.768, z: 0}
+  - index: 31
+    point: {x: -1.777, y: 2.172, z: 0}
+  - index: 32
+    point: {x: -1.716, y: 2.632, z: 0}
+  - index: 33
+    point: {x: -1.358, y: 2.944, z: 0}
+  - index: 34
+    point: {x: -0.8909998, y: 3.039, z: 0}
+  - index: 35
+    point: {x: -0.4239998, y: 3.058, z: 0}
+  - index: 36
+    point: {x: 0.0400002, y: 3.065, z: 0}
+  - index: 37
+    point: {x: 0.5040002, y: 3.058, z: 0}
+  - index: 38
+    point: {x: 0.9710002, y: 3.065, z: 0}
+  - index: 39
+    point: {x: 1.439, y: 3.058, z: 0}
+  - index: 40
+    point: {x: 1.905, y: 3.051, z: 0}
+  - index: 41
+    point: {x: 2.372, y: 2.999, z: 0}
+  - index: 42
+    point: {x: 2.773, y: 2.754, z: 0}
+  - index: 43
+    point: {x: 2.828, y: 2.283, z: 0}
+  - index: 44
+    point: {x: 2.842, y: 1.802, z: 0}
+  - index: 45
+    point: {x: 2.828, y: 1.335, z: 0}
+  - index: 46
+    point: {x: 2.828, y: 0.8699999, z: 0}
+  - index: 47
+    point: {x: 2.828, y: 0.3929999, z: 0}
+  - index: 48
+    point: {x: 2.828, y: -0.07900012, z: 0}
+  - index: 49
+    point: {x: 2.828, y: -0.5530002, z: 0}
+  - index: 50
+    point: {x: 2.828, y: -1.033, z: 0}
+  - index: 51
+    point: {x: 2.828, y: -1.513, z: 0}
+  - index: 52
+    point: {x: 2.828, y: -1.997, z: 0}
+  - index: 53
+    point: {x: 2.828, y: -2.482, z: 0}
+  - index: 54
+    point: {x: 2.828, y: -2.955, z: 0}
+  - index: 55
+    point: {x: 2.828, y: -3.43, z: 0}
+  - index: 56
+    point: {x: 2.834, y: -3.9, z: 0}
+  - index: 57
+    point: {x: 2.628, y: -4.316, z: 0}
+  - index: 58
+    point: {x: 2.202, y: -4.521, z: 0}
+  - index: 59
+    point: {x: 1.729, y: -4.552999, z: 0}
+  - index: 60
+    point: {x: 1.263, y: -4.552999, z: 0}
+  - index: 61
+    point: {x: 0.7860003, y: -4.552999, z: 0}
+  - index: 62
+    point: {x: 0.3150002, y: -4.552999, z: 0}
+  - index: 63
+    point: {x: -0.1529998, y: -4.552999, z: 0}
+  - index: 64
+    point: {x: -0.6249998, y: -4.552999, z: 0}
+  - index: 65
+    point: {x: -1.111, y: -4.552999, z: 0}
+  - index: 66
+    point: {x: -1.583, y: -4.487, z: 0}
+  - index: 67
+    point: {x: -1.994, y: -4.27, z: 0}
+  - index: 68
+    point: {x: -2.328, y: -3.943, z: 0}
+  - index: 69
+    point: {x: -2.578, y: -3.549, z: 0}
+  - index: 70
+    point: {x: -2.745, y: -3.108, z: 0}
+  - index: 71
+    point: {x: -2.869, y: -2.654, z: 0}
+  - index: 72
+    point: {x: -2.933, y: -2.187, z: 0}
+  - index: 73
+    point: {x: -2.961, y: -1.705, z: 0}
+  - index: 74
+    point: {x: -2.98, y: -1.224, z: 0}
+  - index: 75
+    point: {x: -2.98, y: -0.7550002, z: 0}
+  - index: 76
+    point: {x: -2.98, y: -0.2880001, z: 0}
+  - index: 77
+    point: {x: -2.98, y: 0.1799998, z: 0}
+  - index: 78
+    point: {x: -2.98, y: 0.6519998, z: 0}
+  - index: 79
+    point: {x: -2.98, y: 1.13, z: 0}
+  - index: 80
+    point: {x: -2.98, y: 1.595, z: 0}
+  - index: 81
+    point: {x: -2.98, y: 2.07, z: 0}
+  - index: 82
+    point: {x: -2.97, y: 2.561, z: 0}
+  - index: 83
+    point: {x: -2.97, y: 2.561, z: 0}
+  - index: 84
+    point: {x: -2.97, y: 2.981998, z: 0}
+  count: 85
