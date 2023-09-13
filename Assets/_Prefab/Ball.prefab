@@ -143,7 +143,9 @@ MonoBehaviour:
   item: 0
   color: 0
   id: 0
-  ballData: {fileID: 0}
+  ballData:
+    index: 0
+    color1: 0
   ballSpeed: 15
   isBall: 0
   waypoints: []
@@ -156,12 +158,12 @@ MonoBehaviour:
   nextBall: {fileID: 0}
   behindBall: {fileID: 0}
   ballIndex: 0
-  isNextBall: 0
-  isHehindBall: 0
   skinName: 
   skeletonAnimation: {fileID: 7161535057955968908}
   isReload: 0
   isBallAdd: 0
+  isBallMove: 0
+  hasCollided: 0
 --- !u!70 &8611241350437069877
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

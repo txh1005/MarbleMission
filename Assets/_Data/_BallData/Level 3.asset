@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2f3784ea65ad94c8648fcded0cc79b, type: 3}
+  m_Name: Level 3
+  m_EditorClassIdentifier: 
+  ballDatas:
+  - index: 0
+    color1: 0
+  - index: 1
+    color1: 0
+  - index: 2
+    color1: 0
+  - index: 3
+    color1: 0
+  - index: 4
+    color1: 0
+  - index: 5
+    color1: 0
+  - index: 6
+    color1: 4
+  - index: 7
+    color1: 4
+  - index: 8
+    color1: 4
+  - index: 9
+    color1: 4
+  - index: 10
+    color1: 4
+  - index: 11
+    color1: 4
+  - index: 12
+    color1: 2
+  - index: 13
+    color1: 2
+  - index: 14
+    color1: 2
+  - index: 15
+    color1: 2
+  - index: 16
+    color1: 2
+  - index: 17
+    color1: 0
+  - index: 18
+    color1: 0
+  - index: 19
+    color1: 0
+  - index: 20
+    color1: 0
+  - index: 21
+    color1: 0
+  - index: 22
+    color1: 4
+  - index: 23
+    color1: 4
+  - index: 24
+    color1: 4
+  - index: 25
+    color1: 4
+  - index: 26
+    color1: 4
+  - index: 27
+    color1: 2
+  - index: 28
+    color1: 2
+  - index: 29
+    color1: 2
+  - index: 30
+    color1: 0
+  - index: 31
+    color1: 0
+  - index: 32
+    color1: 0
+  - index: 33
+    color1: 4
+  - index: 34
+    color1: 4
+  - index: 35
+    color1: 4
+  - index: 36
+    color1: 2
+  - index: 37
+    color1: 2
+  - index: 38
+    color1: 2
+  - index: 39
+    color1: 2
+  - index: 40
+    color1: 0
+  - index: 41
+    color1: 0
+  - index: 42
+    color1: 4
+  - index: 43
+    color1: 4
+  - index: 44
+    color1: 4
+  count: 45

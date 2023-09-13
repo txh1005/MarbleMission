@@ -15,7 +15,7 @@ public class BowShoot2 : Singleton<BowShoot2>
     public BallColorCount ballColorCount;
     public List<string> availableColors;
 
-    private Ball2 extraBall;
+    public Ball2 extraBall;
     private bool isSpawn = false;
     private float speedExtraUpgrad = 2f;
 
@@ -51,17 +51,24 @@ public class BowShoot2 : Singleton<BowShoot2>
     void SpawnBall()
     {
         int randomMainIndex = Random.Range(0, ballDataList.Count);
-
         BallData2 randomMainBallData = ballDataList[randomMainIndex];
+        /*int randomMainIndex = Random.Range(0, availableColors.Count);
+        string nameColor = availableColors[randomMainIndex];
+        BallColor1 colorMainBall = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor);*/
+
         mainBall = Instantiate(ballPrefab, mainBallPos.position, Quaternion.identity, mainBallPos);
         mainBall.GetComponent<SpriteRenderer>().sortingOrder = 2;
         mainBall.ballData = randomMainBallData;
+
         int randomExtraIndex = Random.Range(0, ballDataList.Count);
         BallData2 randomExtraBallData = ballDataList[randomExtraIndex];
+        /*int randomExtraIndex = Random.Range(0, availableColors.Count);
+        string nameExtraColor = availableColors[randomExtraIndex];
+        BallColor1 colorExtraBall = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor);*/
         extraBall = Instantiate(ballPrefab, extraBallPos.position, Quaternion.identity, extraBallPos);
         extraBall.GetComponent<SpriteRenderer>().sortingOrder = 2;
         extraBall.ballData = randomExtraBallData;
-        //mainBall.transform.SetParent(parentObj);
+        //mainBall.transform.colorExtraBall(parentObj);
         //extraBall.transform.SetParent(parentObj);
         if (mainBall.transform.position != mainBallPos.position)
         {
