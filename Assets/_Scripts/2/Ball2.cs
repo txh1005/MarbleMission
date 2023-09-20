@@ -33,10 +33,10 @@ public class Ball2 : MonoBehaviour
     public bool isReload = false;
     public bool isBallAdd = false;
     public bool isBallMove = false;
+    public bool isFire;
+    public bool hasCollided = false;
 
     private SpriteRenderer sptRenColor;
-    private bool isFire;
-    public bool hasCollided = false;
     private Vector3 initialPosition;
     private int count = 1;
     private Vector3 targetPosition;
@@ -44,7 +44,13 @@ public class Ball2 : MonoBehaviour
     private float distanceToTarget;
     private int a = 0;
     private float timeToReverse;
-    private float moveSpeed = 0.9f;
+    public float moveSpeed = 0.9f;
+    public Sprite ballSkillColor;
+    public Sprite ballThunderColor;
+    public GameObject ballAnim;
+    public bool isSkill;
+    public bool isSlow = false;
+    public bool isThunder;
 
     private void OnEnable()
     {
@@ -63,6 +69,7 @@ public class Ball2 : MonoBehaviour
     void Start()
     {
         SetColor();
+        SetId();
         /*SetId();
         SetType();
         SetItem();*/
@@ -78,6 +85,7 @@ public class Ball2 : MonoBehaviour
         {
             MoveAddBall();
         }
+        //CheckPos(a);
     }
     private void FixedUpdate()
     {
@@ -91,7 +99,17 @@ public class Ball2 : MonoBehaviour
                 ReverseMove();
             RotateBall();
         }
-
+    }
+    public void SetId()
+    {
+        id = ballData.index;
+    }
+    public void UpdateID()
+    {
+        for (int i = 0; i < BallListSpawn2.Instance.ballList.Count; i++)
+        {
+            BallListSpawn2.Instance.ballList[i].id = i;
+        }
     }
     /*    public void SetId()
         {
@@ -125,7 +143,7 @@ public class Ball2 : MonoBehaviour
                     break;
             }
         }*/
-    public void SetColor()
+    public virtual void SetColor()
     {
         color = ballData.color1;
         switch (color)
@@ -151,7 +169,7 @@ public class Ball2 : MonoBehaviour
     }
     public void LaunchBall()
     {
-        if (!isFire)
+        if (!isFire && !isThunder)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //rigid.AddForce((mousePosition - direction) * ballSpeed, ForceMode2D.Impulse);
@@ -204,8 +222,8 @@ public class Ball2 : MonoBehaviour
     }
     public void MoveAddBall()
     {
-        transform.position = Vector3.MoveTowards(transform.position, PosBallAdd(a + 1), speed * 4f * Time.deltaTime);
-        if (transform.position == PosBallAdd(a + 1))
+        transform.position = Vector3.MoveTowards(transform.position, PosBallAdd1(a + 1), speed * 4f * Time.deltaTime);
+        if (transform.position == PosBallAdd1(a + 1))
         {
             isBallAdd = false;
         }
@@ -216,7 +234,7 @@ public class Ball2 : MonoBehaviour
         Vector3 moveDirection = waypoints[currentWaypointIndex].point - transform.position;
         float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, speed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, speed * 5);
         //transform.rotation = targetRotation;
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -255,12 +273,15 @@ public class Ball2 : MonoBehaviour
             isBallAdd = true;
             //StartCoroutine(WaitBall());
             BallListSpawn2.Instance.ballList.Insert(index, BowShoot2.Instance.mainBall);
-            StartCoroutine(InsertBall1(index));
+            StartCoroutine(InsertBall1(index, coliObj));
+
             currentWaypointIndex = BallListSpawn2.Instance.ballList[index + 1].currentWaypointIndex;
+            UpdateID();
+            //InsertBall2(index);
             //MoveAddBall();
             if (index < BallListSpawn2.Instance.ballList.Count && index >= 0)
             {
-                StartCoroutine(DestroySameBall(index,coliObj));
+                StartCoroutine(DestroySameBall(index, coliObj));
             }
             //BallListSpawn2.Instance.InsertBall(BowShoot2.Instance.mainBall,index); 
         }
@@ -311,11 +332,52 @@ public class Ball2 : MonoBehaviour
                 speed = moveSpeed;
             }
         }
-        /*if (collision.gameObject.CompareTag("end") && !isBall)
+        if (isSkill && !coliObj.isBall)
         {
-            Destroy(gameObject);
-            BallListSpawn2.Instance.ballList.RemoveAt(0);
-        }*/
+            List<Ball2> objectsToRemove = new List<Ball2>();
+            isBall = true;
+            int index = BallListSpawn2.Instance.ballList.IndexOf(coliObj);
+            Destroy(BowShoot2.Instance.mainBall.gameObject);
+            //BallListSpawn2.Instance.ballList.RemoveAt(index);
+            float detectionRadius = 1.0f;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.gameObject.CompareTag("ball"))
+                {
+                    Destroy(collider.gameObject);
+                    objectsToRemove.Add(collider.GetComponent<Ball2>());
+                }
+            }
+            int indexToRemove = BallListSpawn2.Instance.ballList.IndexOf(objectsToRemove[^1]);
+            foreach (Ball2 objToRemove in objectsToRemove)
+            {
+                if (BallListSpawn2.Instance.ballList.Contains(objToRemove))
+                {
+                    BallListSpawn2.Instance.ballList.Remove(objToRemove);
+                }
+            }
+            BallListSpawn2.Instance.ballList.RemoveAt(indexToRemove);
+            if (BallListSpawn2.Instance.ballList[indexToRemove].color != BallListSpawn2.Instance.ballList[indexToRemove - 1].color)
+            {
+                for (int i = 0; i < indexToRemove; i++)
+                {
+                    BallListSpawn2.Instance.ballList[i].isMove = false;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < indexToRemove; i++)
+                {
+                    BallListSpawn2.Instance.ballList[i].isReverse = true;
+                    BallListSpawn2.Instance.ballList[i].isMove = true;
+                }
+            }
+        }
+        if (collision.gameObject.CompareTag("end") && !isBall)
+        {
+            this.GetComponent<SpriteRenderer>().sortingOrder = -1;
+        }
     }
     /*void InsertBall(int index)
     {
@@ -346,7 +408,7 @@ public class Ball2 : MonoBehaviour
             ball.transform.position = newPos;
         }
     }
-    Vector3 PosBallAdd(int index)
+    /*Vector3 PosBallAdd(int index)
     {
         Ball2 ball = BallListSpawn2.Instance.ballList[index];
         int currentWaypointIndex = ball.currentWaypointIndex;
@@ -355,22 +417,64 @@ public class Ball2 : MonoBehaviour
         Vector3 dir = ball.waypoints[currentWaypointIndex + 1].point - ball.waypoints[currentWaypointIndex].point;
         Vector3 newPos = ball.waypoints[currentWaypointIndex].point + dir.normalized * (distanceAB - distance);
         return newPos;
+    }*/
+    Vector3 PosBallAdd1(int index)
+    {
+        Ball2 ball = BallListSpawn2.Instance.ballList[index];
+        Vector3 dir = ball.waypoints[currentWaypointIndex].point - ball.transform.position;
+        Vector3 newPos = ball.transform.position + dir.normalized * 0.5f;
+        return newPos;
     }
-    public IEnumerator InsertBall1(int index)
+    public IEnumerator InsertBall1(int index, Ball2 _ball)
+    {
+        if (!_ball.isSlow)
+        {
+            for (int i = 0; i <= index; i++)
+            {
+                Ball2 ball = BallListSpawn2.Instance.ballList[i];
+                ball.speed = moveSpeed * 3;
+            }
+            yield return new WaitForSeconds(0.27f);
+            for (int i = 0; i <= index; i++)
+            {
+                Ball2 ball = BallListSpawn2.Instance.ballList[i];
+                ball.speed = moveSpeed;
+                //ball.isMove = false;
+            }
+        }
+        else
+        {
+            for (int i = 0; i <= index; i++)
+            {
+                Ball2 ball = BallListSpawn2.Instance.ballList[i];
+                ball.speed = moveSpeed * 3;
+            }
+            yield return new WaitForSeconds(0.5f);
+            for (int i = 0; i <= index; i++)
+            {
+                Ball2 ball = BallListSpawn2.Instance.ballList[i];
+                ball.speed = moveSpeed;
+                //ball.isMove = false;
+            }
+        }
+    }
+    void InsertBall2(int index)
     {
         for (int i = 0; i <= index; i++)
         {
             Ball2 ball = BallListSpawn2.Instance.ballList[i];
-            ball.speed = moveSpeed * 3 + 0.01f;
+            ball.speed = moveSpeed * 3;
         }
-        yield return new WaitForSeconds(0.23f);
+    }
+    void Abc(int index)
+    {
         for (int i = 0; i <= index; i++)
         {
             Ball2 ball = BallListSpawn2.Instance.ballList[i];
             ball.speed = moveSpeed;
-            //ball.isMove = false;
         }
     }
+
     public IEnumerator InsertBallStop(int index)//stop list ball tren
     {
         for (int i = 0; i <= index - 1; i++)
@@ -458,9 +562,8 @@ public class Ball2 : MonoBehaviour
     {
         SameColorNext1(GameController.Instance.nextBallIndex);
         SameColorBehind1(GameController.Instance.nextBallIndex + 1);
-        Debug.Log(count);
-        if (count >= BallListSpawn2.Instance.ballList.Count && count >= 3)
-        { 
+        if (count == BallListSpawn2.Instance.ballList.Count && count >= 3)
+        {
             for (int i = BallListSpawn2.Instance.ballList.Count - 1; i >= 0; i--)
             {
                 Destroy(BallListSpawn2.Instance.ballList[i].gameObject);
@@ -506,7 +609,6 @@ public class Ball2 : MonoBehaviour
             {
                 if (BallListSpawn2.Instance.ballList[GameController.Instance.nextBallIndex + 1].color == BallListSpawn2.Instance.ballList[GameController.Instance.nextBallIndex].color)
                 {
-                    count = 0;
                     for (int i = GameController.Instance.nextBallIndex; i >= 0; i--)
                     {
                         BallListSpawn2.Instance.ballList[i].isReverse = true;
@@ -533,7 +635,7 @@ public class Ball2 : MonoBehaviour
             }
         }
     }
-    IEnumerator DestroySameBall(int index,Ball2 coli)
+    IEnumerator DestroySameBall(int index, Ball2 coli)
     {
         if (isBallAdd)
         {
@@ -564,9 +666,10 @@ public class Ball2 : MonoBehaviour
                 {
                     if (BallListSpawn2.Instance.ballList[GameController.Instance.nextBallIndex + 1].color == BallListSpawn2.Instance.ballList[GameController.Instance.nextBallIndex].color)
                     {
-                        if (GameController.Instance.nextBallIndex==0)
+                        if (GameController.Instance.nextBallIndex == 0)
                         {
                             BallListSpawn2.Instance.ballList[0].isReverse = false;
+                            Debug.Log("a");
                         }
                         for (int i = GameController.Instance.nextBallIndex; i >= 0; i--)
                         {
@@ -585,6 +688,24 @@ public class Ball2 : MonoBehaviour
             }
         }
     }
+    public void CheckPos(int index)
+    {
+        if (GameController.Instance.nextBallIndex < BallListSpawn2.Instance.ballList.Count - 1)
+        {
+            if (BowShoot2.Instance.mainBall.isBallAdd)
+            {
+                for (int i = 0; i < index; i++)
+                {
+                    BallListSpawn2.Instance.ballList[i].speed = moveSpeed * 3;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < index; i++)
+                {
+                    BallListSpawn2.Instance.ballList[i].speed = moveSpeed;
+                }
+            }
+        }
+    }
 }
-
-

@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     public void ResetGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    public void ThunderBooster()
+    {
+        BowShoot2.Instance.mainBall.ballAnim.SetActive(false);
+        BowShoot2.Instance.mainBall.GetComponent<SpriteRenderer>().sprite = BowShoot2.Instance.mainBall.ballThunderColor;
+        BowShoot2.Instance.mainBall.isThunder = true;
+        //BowShoot2.Instance.mainBall.isFire = false;
+    }    
 }

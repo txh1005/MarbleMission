@@ -7,11 +7,7 @@ public class GameController : Singleton<GameController>
     public List<GameObject> destroyBallList;
     public int nextBallIndex;
     public int behindBallIndex;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
     public void StopBallList(int index)
     {
         for (int i = 0; i < index; i++)
@@ -35,7 +31,7 @@ public class GameController : Singleton<GameController>
     {
         destroyBallList.Clear();
         //destroyBallList.RemoveAll(ball=>ball == null);
-    }  
+    }
     public void RemoveSameBall()
     {
         /*if (destroyBallList!=null)
@@ -47,10 +43,21 @@ public class GameController : Singleton<GameController>
         }*/
         if (behindBallIndex == BallListSpawn2.Instance.ballList.Count - 1 && BallListSpawn2.Instance.ballList[^1].color == BallListSpawn2.Instance.ballList[^2].color)
         {
-            for (int i = behindBallIndex; i > nextBallIndex; i--)
+            if (BallListSpawn2.Instance.ballList[nextBallIndex].color == BallListSpawn2.Instance.ballList[nextBallIndex + 1].color)
             {
-                Destroy(BallListSpawn2.Instance.ballList[i].gameObject);
-                BallListSpawn2.Instance.ballList.RemoveAt(i);
+                for (int i = behindBallIndex; i >= nextBallIndex; i--)
+                {
+                    Destroy(BallListSpawn2.Instance.ballList[i].gameObject);
+                    BallListSpawn2.Instance.ballList.RemoveAt(i);
+                }
+            }
+            else
+            {
+                for (int i = behindBallIndex; i > nextBallIndex; i--)
+                {
+                    Destroy(BallListSpawn2.Instance.ballList[i].gameObject);
+                    BallListSpawn2.Instance.ballList.RemoveAt(i);
+                }
             }
             for (int i = BallListSpawn2.Instance.ballList.Count - 1; i >= 0; i--)
             {
@@ -73,7 +80,13 @@ public class GameController : Singleton<GameController>
                 BallListSpawn2.Instance.ballList.RemoveAt(i);
             }
         }
-
         //ClearList();
+    }
+    public void GameOver()
+    {
+        Ball2 ball = BallListSpawn2.Instance.ballList[0];
+        ball.speed = ball.moveSpeed * 5;
+        Destroy(BallListSpawn2.Instance.ballList[0].gameObject);
+        BallListSpawn2.Instance.ballList.RemoveAt(0);
     }
 }

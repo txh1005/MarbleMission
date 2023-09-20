@@ -12,7 +12,6 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
     public int maxBall;
     public Transform storeObj;
 
-    private bool spawningEnabled = true;
     void Start()
     {
         StartCoroutine(Spawn());
@@ -25,7 +24,7 @@ public class BallListSpawn2 : Singleton<BallListSpawn2>
     {
         for (int i = 0; i < maxBall; i++)
         {
-            yield return new WaitForSeconds(0.5f);//0.45/speed=0.5f
+            yield return new WaitForSeconds(0.55f);//0.45/speed=0.5f
             Ball2 newBall = Instantiate(ballPrefab, transform.position, Quaternion.identity);
             Vector3 a = newBall.transform.position;
             a.z = 0f;

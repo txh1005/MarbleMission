@@ -9,6 +9,7 @@ TagManager:
   - stone
   - destroy
   - end
+  - button
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BowShoot2 : Singleton<BowShoot2>
 {
@@ -9,23 +11,40 @@ public class BowShoot2 : Singleton<BowShoot2>
     [SerializeField] private Transform parentObj;
     [SerializeField] private Transform storeBallObj;
     [SerializeField] private Transform extraBallPos;
+    [SerializeField] private float speedExtraUpgrad;
 
     public Ball2 mainBall;
     public List<BallData2> ballDataList;
     public BallColorCount ballColorCount;
     public List<string> availableColors;
-
     public Ball2 extraBall;
+    public BallSkill ballSkill;
+    public Button thunderButton;
+
     private bool isSpawn = false;
-    private float speedExtraUpgrad = 2f;
+
 
     private void Start()
     {
-        SpawnBall();
+        StartCoroutine(SpawnBall());
+        Button btnThunder = thunderButton.GetComponent<Button>();
+        btnThunder.onClick.AddListener(ClickBtnThunder);
+       
+    }
+    void ClickBtnThunder()
+    {
+        Debug.Log("a");
     }
     private void Update()
     {
         availableColors = new List<string>(ballColorCount.BallColorDic.Keys);
+        if (Input.GetKey(KeyCode.Space))
+        {
+            mainBall.ballAnim.SetActive(false);
+            mainBall.GetComponent<SpriteRenderer>().sprite = mainBall.ballSkillColor;
+            mainBall.isSkill = true;
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             mainBall.LaunchBall();
@@ -33,41 +52,42 @@ public class BowShoot2 : Singleton<BowShoot2>
             extraBall.transform.SetParent(mainBallPos);
             isSpawn = true;
         }
-        if (isSpawn)
+        if (isSpawn && !mainBall.isThunder)
         {
             if (extraBall.transform.position == mainBallPos.position)
             {
                 isSpawn = false;
-                ExtraBallUpgradeToMainBall();
+                StartCoroutine(ExtraBallUpgradeToMainBall());
             }
             else
             {
                 extraBall.transform.position = Vector3.MoveTowards(extraBall.transform.position, mainBallPos.position, speedExtraUpgrad * Time.deltaTime);
-                extraBall.transform.localScale = Vector3.Lerp(extraBall.transform.localScale, Vector3.one, speedExtraUpgrad);
+                extraBall.transform.localScale = Vector3.Lerp(extraBall.transform.localScale, new Vector3(1.1f, 1.1f), speedExtraUpgrad);
             }
         }
         SwapBall();
     }
-    void SpawnBall()
+    IEnumerator SpawnBall()
     {
-        int randomMainIndex = Random.Range(0, ballDataList.Count);
-        BallData2 randomMainBallData = ballDataList[randomMainIndex];
-        /*int randomMainIndex = Random.Range(0, availableColors.Count);
+        /*int randomMainIndex = Random.Range(0, ballDataList.Count);
+        BallData2 randomMainBallData = ballDataList[randomMainIndex];*/
+        yield return new WaitForSeconds(1f);
+        int randomMainIndex = Random.Range(0, availableColors.Count);
         string nameColor = availableColors[randomMainIndex];
-        BallColor1 colorMainBall = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor);*/
+        BallColor1 colorMainBall = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor);
 
         mainBall = Instantiate(ballPrefab, mainBallPos.position, Quaternion.identity, mainBallPos);
         mainBall.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        mainBall.ballData = randomMainBallData;
-
-        int randomExtraIndex = Random.Range(0, ballDataList.Count);
-        BallData2 randomExtraBallData = ballDataList[randomExtraIndex];
-        /*int randomExtraIndex = Random.Range(0, availableColors.Count);
+        mainBall.ballData.color1 = colorMainBall;
+        /*int randomExtraIndex = Random.Range(0, ballDataList.Count);
+        BallData2 randomExtraBallData = ballDataList[randomExtraIndex];*/
+        int randomExtraIndex = Random.Range(0, availableColors.Count);
         string nameExtraColor = availableColors[randomExtraIndex];
-        BallColor1 colorExtraBall = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor);*/
+        BallColor1 colorExtraBall = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameExtraColor);
+
         extraBall = Instantiate(ballPrefab, extraBallPos.position, Quaternion.identity, extraBallPos);
         extraBall.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        extraBall.ballData = randomExtraBallData;
+        extraBall.ballData.color1 = colorExtraBall;
         //mainBall.transform.colorExtraBall(parentObj);
         //extraBall.transform.SetParent(parentObj);
         if (mainBall.transform.position != mainBallPos.position)
@@ -79,18 +99,27 @@ public class BowShoot2 : Singleton<BowShoot2>
         mainBall.isBall = true;
         extraBall.isBall = true;
     }
-    void ExtraBallUpgradeToMainBall()
+    IEnumerator ExtraBallUpgradeToMainBall()
     {
-        int randomMainIndex1 = Random.Range(0, availableColors.Count);
+        yield return new WaitForSeconds(0.1f);
+        /*int randomMainIndex1 = Random.Range(0, availableColors.Count);
         string nameColor = availableColors[randomMainIndex1];
-        BallColor1 extraColor = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor);
+        BallColor1 mainColor = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor);*/
 
+        int randomExtraIndex1 = Random.Range(0, availableColors.Count);
+        string nameColor1 = availableColors[randomExtraIndex1];
+        BallColor1 extraColor = (BallColor1)System.Enum.Parse(typeof(BallColor1), nameColor1);
+
+        //mainBall.ballData.color1 = mainColor;
         mainBall = extraBall;
-        //int randomExtraIndex = Random.Range(0, ballDataList.Count);
-        //BallData2 randomExtraBallData = ballDataList[randomExtraIndex];
+
+        /*int randomExtraIndex = Random.Range(0, ballDataList.Count);
+        BallData2 randomExtraBallData = ballDataList[randomExtraIndex];*/
+
         extraBall = Instantiate(ballPrefab, extraBallPos.position, Quaternion.identity, extraBallPos);
         extraBall.GetComponent<SpriteRenderer>().sortingOrder = 2;
         //extraBall.ballData = randomExtraBallData;
+
         extraBall.ballData.color1 = extraColor;
         extraBall.transform.localScale = new Vector3(0.6f, 0.6f, 0f);
         mainBall.isBall = true;
