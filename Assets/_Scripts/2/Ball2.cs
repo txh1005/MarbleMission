@@ -35,6 +35,7 @@ public class Ball2 : MonoBehaviour
     public bool isBallMove = false;
     public bool isFire;
     public bool hasCollided = false;
+    public float distance;
 
     private SpriteRenderer sptRenColor;
     private Vector3 initialPosition;
@@ -273,17 +274,16 @@ public class Ball2 : MonoBehaviour
             isBallAdd = true;
             //StartCoroutine(WaitBall());
             BallListSpawn2.Instance.ballList.Insert(index, BowShoot2.Instance.mainBall);
-            StartCoroutine(InsertBall1(index, coliObj));
-
+            //StartCoroutine(InsertBall1(index, coliObj));
+            StartCoroutine(InsertBallList(index - 1));
             currentWaypointIndex = BallListSpawn2.Instance.ballList[index + 1].currentWaypointIndex;
             UpdateID();
-            //InsertBall2(index);
             //MoveAddBall();
             if (index < BallListSpawn2.Instance.ballList.Count && index >= 0)
             {
                 StartCoroutine(DestroySameBall(index, coliObj));
             }
-            //BallListSpawn2.Instance.InsertBall(BowShoot2.Instance.mainBall,index); 
+            //BallListSpawn2.Instance.InsertBall(BowShoot2.Instance.mainBall,index);
         }
         if (isReverse && !coliObj.isReverse)
         {
@@ -434,7 +434,7 @@ public class Ball2 : MonoBehaviour
                 Ball2 ball = BallListSpawn2.Instance.ballList[i];
                 ball.speed = moveSpeed * 3;
             }
-            yield return new WaitForSeconds(0.27f);
+            yield return new WaitForSeconds(0.275f);
             for (int i = 0; i <= index; i++)
             {
                 Ball2 ball = BallListSpawn2.Instance.ballList[i];
@@ -458,23 +458,33 @@ public class Ball2 : MonoBehaviour
             }
         }
     }
-    void InsertBall2(int index)
+    public Vector3 InsertBall2(int index)
     {
-        for (int i = 0; i <= index; i++)
+        Ball2 ball = BallListSpawn2.Instance.ballList[index];
+        int currentWaypointIndex = ball.currentWaypointIndex;
+        Vector3 dir = ball.waypoints[currentWaypointIndex+1].point - ball.transform.position;
+        Vector3 newPos = ball.transform.position + dir.normalized * 0.5f;
+        return newPos;
+    }
+    public IEnumerator InsertBallList(int index)
+    {
+        //StopCoroutine(BallListSpawn2.Instance.spawnCoroutine);
+        for (int i = 0; i < BallListSpawn2.Instance.ballList.Count; i++)
         {
-            Ball2 ball = BallListSpawn2.Instance.ballList[i];
-            ball.speed = moveSpeed * 3;
+            BallListSpawn2.Instance.ballList[i].speed = 0f;
+        }
+        for (int i = index; i > 0; i--)
+        {
+            BallListSpawn2.Instance.ballList[i].transform.position = Vector3.MoveTowards(BallListSpawn2.Instance.ballList[i].transform.position, BallListSpawn2.Instance.ballList[i - 1].transform.position, 0.5f);
+        }      
+        BallListSpawn2.Instance.ballList[0].transform.position = Vector3.MoveTowards(BallListSpawn2.Instance.ballList[0].transform.position, InsertBall2(0), 0.5f);
+        yield return new WaitForSeconds(0.02f);
+        //StartCoroutine(BallListSpawn2.Instance.ContinueSpawn());
+        for (int i = 0; i < BallListSpawn2.Instance.ballList.Count; i++)
+        {
+            BallListSpawn2.Instance.ballList[i].speed = 0.9f;
         }
     }
-    void Abc(int index)
-    {
-        for (int i = 0; i <= index; i++)
-        {
-            Ball2 ball = BallListSpawn2.Instance.ballList[i];
-            ball.speed = moveSpeed;
-        }
-    }
-
     public IEnumerator InsertBallStop(int index)//stop list ball tren
     {
         for (int i = 0; i <= index - 1; i++)

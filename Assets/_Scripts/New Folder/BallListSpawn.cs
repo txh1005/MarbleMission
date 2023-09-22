@@ -1,27 +1,21 @@
-using PathCreation;
+/*using PathCreation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallListSpawn : MonoBehaviour
+public class BallListSpawn : Singleton<BallListSpawn>
 {
-    private static BallListSpawn instance;
-    public static BallListSpawn Instance { get => instance; }
 
-    public Ball[] prefab;
+    public Ball2[] ball;
     public PathCreator path;
     public float speed;
     public float delayTime;
     public int maxBall;
-    public List<Ball> ballList;
+    public List<Ball2> ballList;
     public Transform storeBallObj;
 
-    public Ball[] testNextPoint;
-    private void Awake()
-    {
-        if (BallListSpawn.instance != null) Debug.LogError("Only 1 BallListSpawn allow to exist");
-        BallListSpawn.instance = this;
-    }
+    public Ball2[] testNextPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,11 +33,11 @@ public class BallListSpawn : MonoBehaviour
         for (int i = 0; i < maxBall; i++)
         {
             yield return new WaitForSeconds(delayTime);
-            Ball ball = Instantiate(prefab[Random.Range(0, prefab.Length)], path.path.GetPoint(0), Quaternion.identity);
-            ball.id = ballList.Count;
-            ballList.Add(ball);
-            ball.transform.SetParent(storeBallObj);
-            StartCoroutine(MoveBall(i));
+            Ball2 _ball = Instantiate(ball[Random.Range(0, ball.Length)], path.path.GetPoint(0), Quaternion.identity);
+            //ball.id = ballList.Count;
+            ballList.Add(_ball);
+            _ball.transform.SetParent(storeBallObj);
+            //StartCoroutine(MoveBall(i));
         }
     }
     public IEnumerator MoveBall(int i)
@@ -61,12 +55,13 @@ public class BallListSpawn : MonoBehaviour
     {
         for(int i=0; i<index;i++)
         {
-            ballList[i].distance += speed * delayTime;
+            //ballList[i].distance += speed * delayTime;
         }
     }   
-    public void InsertList(int index,Ball ball1)
+    public void InsertList(int index,Ball2 ball1)
     {
-        ball1 = gameObject.GetComponent<Ball>();
+        ball1 = gameObject.GetComponent<Ball2>();
         ballList.Insert(index,ball1);
-    }    
+    } 
 }
+*/
