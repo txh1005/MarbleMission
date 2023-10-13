@@ -125,7 +125,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 2
+  m_Constraints: 4
 --- !u!70 &76597218375672314
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -164,9 +164,12 @@ MonoBehaviour:
     color1: 2
   skeletonAnimation: {fileID: 8679205469789143100}
   isMove: 0
-  nextBall: {fileID: 0}
-  prevBall: {fileID: 0}
-  ball: {fileID: 0}
+  spawnBall: {fileID: 0}
+  isFire: 0
+  ballSpeed: 20
+  isBall: 0
+  a: 0
+  isBallAdd: 0
 --- !u!1 &4338524617638695973
 GameObject:
   m_ObjectHideFlags: 0

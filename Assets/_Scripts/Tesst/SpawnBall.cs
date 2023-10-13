@@ -19,11 +19,40 @@ public class SpawnBall : MonoBehaviour
         ballList = new LinkedList<TestBall>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
+    /*    public void Spawn1()
+        {
+            while (ballIndex < maxBall)
+            {
+                TestBall newBall = Instantiate(ballPre, transform.position, Quaternion.identity);
+                Vector3 a = newBall.transform.position;
+                a.z = 0f;
+                newBall.isMove = true;
+                newBall.ballData = ballData2.ballDatas[ballIndex];
+                ballList.AddLast(newBall);
+                LinkedListNode<TestBall> nodeF = ballList.First;
+                LinkedListNode<TestBall> nodeL = ballList.Last;
+                if (ballIndex == 0)
+                {
+                    newBall.Next = null;
+                    newBall.Prev = null;
+                }
+                if (ballIndex > 0)
+                {
+                    for (int i = 1; i < ballIndex; i++)
+                    {
+                        nodeF = nodeF.Next;
+                    }
+                    newBall.Next = nodeF.Value;
+                    newBall.Prev = null;
+                    newBall.Next.Prev = newBall;
+                }
+                ballIndex++;
+            }
+        }*/
     public IEnumerator Spawn()
     {
         while (ballIndex < maxBall)
@@ -51,7 +80,7 @@ public class SpawnBall : MonoBehaviour
                 }
                 newBall.Next = nodeF.Value;
                 newBall.Prev = null;
-                newBall.Next.Prev = newBall;
+                newBall.Next.Prev = nodeF.Next.Value;
             }
             ballIndex++;
         }

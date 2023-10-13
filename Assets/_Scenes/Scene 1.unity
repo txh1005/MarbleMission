@@ -2801,6 +2801,7 @@ GameObject:
   - component: {fileID: 679253170}
   - component: {fileID: 679253169}
   - component: {fileID: 679253168}
+  - component: {fileID: 679253171}
   m_Layer: 0
   m_Name: Maybug
   m_TagString: Untagged
@@ -2833,7 +2834,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679253166}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4a0aaf4547791f43bde40b31ca7610e, type: 3}
   m_Name: 
@@ -2925,6 +2926,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &679253171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679253166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62547e4d99fdb8f4c84fb1a8e955f60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 7760937057705456292, guid: 43603fb365f729a4db9964fae8f0ffd1, type: 3}
+  mainBallPos: {fileID: 2023489186}
+  parentObj: {fileID: 679253167}
+  storeBallObj: {fileID: 801614380}
+  extraBallPos: {fileID: 1287110061}
+  speedExtraUpgrad: 3
+  mainBall: {fileID: 0}
+  ballDataList: []
+  ballColorCount: {fileID: 1671589448}
+  availableColors: []
+  extraBall: {fileID: 0}
+  ballSkill: {fileID: -6864355848144988149, guid: 4cbe2e359e59b254a96c01cecf179f49, type: 3}
+  thunderButton: {fileID: 1532054576}
 --- !u!1 &681610965
 GameObject:
   m_ObjectHideFlags: 0
@@ -3484,6 +3510,7 @@ GameObject:
   - component: {fileID: 811397580}
   - component: {fileID: 811397579}
   - component: {fileID: 811397581}
+  - component: {fileID: 811397582}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -3506,6 +3533,15 @@ MonoBehaviour:
   destroyBallList: []
   nextBallIndex: 0
   behindBallIndex: 0
+  spawnBall: {fileID: 1087813819}
+  count: 1
+  destroyList: []
+  isDestroy: 0
+  rad: 0.47
+  isInsert: 0
+  reverseIndex: 0
+  isInsertStop: 0
+  indexColi: 0
 --- !u!4 &811397580
 Transform:
   m_ObjectHideFlags: 0
@@ -3533,6 +3569,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a652c5b8c6cb0fa4bbf2399133a13354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &811397582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811397578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f5f9fe44905f44885695860e7b6889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnBall: {fileID: 1087813819}
+  nextIndex: 0
+  isBallStop: 0
 --- !u!1 &817958005
 GameObject:
   m_ObjectHideFlags: 0
@@ -4077,7 +4128,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 378efb842520a184c92c002d8cb22178, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.64705884}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.45490196}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4661,7 +4712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 722904611831149003, guid: 4073932e71e91bc49918f1acf7a73c6d, type: 3}
-  ballData2: {fileID: 11400000, guid: 2e21a1d71f2afad47993ed2bd6231b76, type: 2}
+  ballData2: {fileID: 11400000, guid: ae2e76b93de7d8d4582f7cfdb1d0f1c5, type: 2}
   pathSO: {fileID: 11400000, guid: 2847463c7526392478628dbe33a89d09, type: 2}
   ballList: []
   maxBall: 16
@@ -4696,7 +4747,7 @@ MonoBehaviour:
   ballPre: {fileID: 7760937057705456292, guid: 43603fb365f729a4db9964fae8f0ffd1, type: 3}
   ballData2: {fileID: 11400000, guid: 2e21a1d71f2afad47993ed2bd6231b76, type: 2}
   ballIndex: 0
-  maxBall: 0
+  maxBall: 5
 --- !u!1 &1106143668
 GameObject:
   m_ObjectHideFlags: 0
@@ -8629,7 +8680,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 270
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0
     vertexPathMinVertexSpacing: 0
     showTransformTool: 1

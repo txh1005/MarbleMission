@@ -8,6 +8,7 @@ public class EventManager : Singleton<EventManager>
 {
     public static event Action<string> OnGameOver;
     public UnityAction ShowObject;
+
     public void Move()
     {
         OnGameOver?.Invoke("abc");
